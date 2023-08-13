@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadoras Veterinárias</title>
+
+    <script>
+        document.addEventListener("contextmenu", function(e) {
+            e.preventDefault();
+        });
+
+        document.addEventListener("keydown", function(e) {
+            if (e.ctrlKey && (e.keyCode === 85 || e.keyCode === 73)) {
+                e.preventDefault();
+            }
+        });
+    </script>
+
+    
+<!-- Inicio CSS Principal -->
+    
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        max-width: 664px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    h1 {
+        font-size: 24px;
+        margin-top: 0;
+        text-align: center;
+        color: #333; /* Cor preta */
+    }
+
+    h2 {
+        font-size: 18px;
+        margin-top: 0;
+        color: #333;
+    }
+
+    p {
+        font-size: 15px;
+        line-height: 1.5;
+        margin-bottom: 10px;
+        text-align: justify;
+    }
+
+    .whatsapp-btn {
+        display: block;
+        width: 100%;
+        text-align: center;
+        margin-top: 2rem;
+    }
+
+    .whatsapp-btn a {
+        display: inline-block;
+        background-color: #4caf50;
+        color: #fff;
+        text-decoration: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 15px;
+    }
+
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 100vh; /* Garante que o footer fique no final da página */
+    }
+
+    footer {
+        margin-top: 12px;
+        color: #666;
+        font-size: 12px;
+        background-color: #f5f5f5;
+        padding: 10px;
+        text-align: center;
+        border-top: 0px solid #ccc;
+    }
+
+    .calculadora-container {
+        margin-bottom: 12px;
+        padding: 20px;
+        background-color: #f5f5f5;
+        border-radius: 5px;
+    }
+
+    .calculadora-container label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .calculadora-select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 15px;
+    }
+
+    .codigo-box {
+        text-align: justify;
+        line-height: 1.5;
+        font-size: 15px;
+        color: #333;
+    }
+
+    .codigo-box.show {
+        display: block;
+    }
+
+    .codigo-titulo {
+        font-weight: bold;
+        margin-bottom: 10px;
+        color: #333;
+    }
+
+    .botoes-container {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+    }
+
+    .botao-redirecionar {
+        flex: 1;
+        background-color: #f5f5f5;
+        color: #333;
+        border: 0px solid #ccc;
+        padding: 8px 16px;
+        border-radius: 5px;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        font-size: 12px;
+        margin: 0 5px;
+
+        /* Centraliza o conteúdo (texto) na vertical e horizontal */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    @media screen and (max-width: 768px) {
+        h1 {
+            font-size: 24px;
+        }
+
+        .calculadora-select {
+            font-size: 15px;
+        }
+
+        .whatsapp-btn a {
+            font-size: 15px;
+        }
+
+        .container {
+            padding: 1rem;
+        }
+    }
+</style>
+
+    
+<!-- Fim CSS Principal -->
+    
+</head>
+    
+<!-- Menu Principal  -->    
+    
+<body onload="verificarAcesso()">
+    <div class="container">
+        <h1>Calculadora Inteligente Veterinária</h1>
+        <div class="calculadora-container">
+            <label for="selecionarCalculadora">Selecione a Calculadora:</label>
+            <select class="calculadora-select" id="selecionarCalculadora" onchange="mostrarCalculadora()">
+                <option value="boas-vindas">-- Bem-vindo(a) --</option>
+                <option value="dose-medicamentos">Dose de Medicamentos</option>
+                <option value="unidades-internacionais">&nbsp;&nbsp;&nbsp;&nbsp;Unidades Internacionais - UI</option>
+                <option value="Antineoplasico">&nbsp;&nbsp;&nbsp;&nbsp;Quimioterápicos</option>
+                <option value="fluidoterapia">Fluidoterapia</option>
+                <option value="transfusao-sangue">Transfusão de Sangue</option>
+                <option value="debito-urinario">Débito Urinário</option>
+                <option value="gestacional">Gestacional</option>
+                <option value="superficiecorporea">Superfície Corpórea</option>
+                <option value="apgar">Escore de Apgar</option>
+            </select>
+        </div>
+
+<!-- Inicio Página Principal -->        
+        
+<div class="calculadora-container codigo-box" id="boas-vindas" style="display: block;">
+    <h2>Bem-vindo(a)!</h2>
+    <p>No nosso sistema, você terá acesso a diversas calculadoras que auxiliarão no atendimento veterinário. Essas calculadoras foram desenvolvidas para simplificar a rotina tanto do médico veterinário quanto do estudante de medicina veterinária. No entanto, é fundamental utilizar corretamente o sistema para evitar resultados imprecisos, que poderiam levar a erros nas doses de medicamentos administrados.</p>
+
+    <p><strong>Com o intuito de garantir a segurança e eficácia do uso das calculadoras, recomendamos sempre clicar em "Limpar" antes de iniciar um novo cálculo, especialmente se houver qualquer dúvida em relação aos parâmetros ou procedimentos. Destacamos que não nos responsabilizamos por quaisquer consequências advindas do mau uso do sistema.</strong></p>
+
+    <p>Contamos com sua colaboração para utilizar essa ferramenta de forma responsável e segura, visando sempre o bem-estar e a saúde dos animais atendidos. Caso precise de qualquer orientação ou esclarecimento, nossa equipe estará à disposição para ajudá-lo.</p>
+
+   
+</div>       
+        
+<!-- Fim Página Principal -->        
+        
+        
+<!-- Inicio Dose de Medicamentos -->       
+                
+<div class="calculadora-container codigo-box" id="dose-medicamentos" style="display: none;">
+    <div class="container">
+        <h2>Dose de Medicamentos</h2>
+        
+        <label class="input-label" for="peso">Peso do Animal (kg):</label>
+        <input type="number" id="peso-dose-medicamentos" placeholder="Insira o peso do animal">
+        
+        <label class="input-label" for="dose">Dose do Medicamento:</label>
+        <input type="number" id="dose" placeholder="Insira a dose do medicamento">
+        
+        <label class="input-label" for="concentracao">Concentração do Medicamento:</label>
+        <div class="concentracao-container">
+            <input class="concentracao-input-dose-medicamento" type="number" id="concentracao" placeholder="Insira a concentração em mg/mL">
+            <select class="concentracao-unidade" id="concentracaoUnidade">
+                <optgroup label="Injetáveis">
+                    <option value="mg/ml">mg/mL</option>
+                    <option value="mcg/mL">mcg/mL</option>
+                    <option value="%">%</option> 
+                </optgroup>
+                <optgroup label="Comprimido">
+                    <option value="mg">mg</option>
+                    <option value="g">g</option>
+                </optgroup>
+                <optgroup label="S. Liquida">
+                    <option value="suspensao">Suspensão</option>
+                </optgroup>
+            </select>
+        </div>
+
+        <!-- Campo para digitar o valor em mL (somente visível quando Suspensão estiver selecionado) -->
+        <div class="concentracao-container" id="concentracaoMlContainer" style="display: none;">
+            <input class="concentracao-input-dose-medicamento" type="number" id="concentracaoMl" placeholder="Insira a concentração em mL">
+        </div>
+
+        <div class="btn-container">
+            <button class="limpar-btn" onclick="limparCamposMedicamentos()">Limpar</button>
+            <button onclick="calcularDose()">Calcular</button>
+        </div>
+
+        <p id="resultado-dose-medicamentos"></p>
+        <div class="sugestoes-box" id="sugestoes"></div>
+    </div>
+</div>
+
+<!-- Fim Dose de Medicamentos --> 
+
+        
+<!-- Inicio Unidades Internacionais -->  
+        
+<div class="calculadora-container codigo-box" id="unidades-internacionais" style="display: none;">
+    <div class="container">
+        <h2>Unidades Internacionais (UI)</h2>
+        
+        <label class="input-label" for="calcUI_peso">Peso do Animal (kg):</label>
+        <input type="number" id="calcUI_peso" placeholder="Insira o peso do animal">
+
+        <label class="input-label" for="calcUI_dose">Dose do Medicamento (UI):</label>
+        <input type="number" id="calcUI_dose" placeholder="Insira a dose do medicamento em UI">
+
+        <label class="input-label">Concentração do Medicamento:</label>
+        <div class="concentracao-container">
+            <input class="concentracao-input-unidadeinternacionais" type="number" id="calcUI_concentracao" placeholder="Insira a concentração em UI/mL">
+            <select class="concentracao-unidade" id="calcUI_concentracaoUnidade">
+                <option value="UI/mL">UI/mL</option>
+                <option value="UI/mg">UI/mg</option>
+                <option value="UI/mcg">UI/mcg</option>
+            </select>
+        </div>
+
+        <!-- Campos para digitar o valor em mg/mL (somente visível quando UI/mg estiver selecionado) -->
+        <div class="concentracao-container" id="calcUI_concentracaoMgContainer" style="display: none;">
+            <input class="concentracao-input-unidadeinternacionais" type="number" id="calcUI_concentracaoMg" placeholder="Insira a concentração em mg/mL">
+        </div>
+
+        <!-- Campos para digitar o valor em mcg/mL (somente visível quando UI/mcg estiver selecionado) -->
+        <div class="concentracao-container" id="calcUI_concentracaoMcgContainer" style="display: none;">
+            <input class="concentracao-input-unidadeinternacionais" type="number" id="calcUI_concentracaoMcg" placeholder="Insira a concentração em mcg/mL">
+        </div>
+
+        <div class="btn-container">
+            <button class="limpar-btn" onclick="calcUI_limparCampos()">Limpar</button>
+            <button onclick="calcUI_calcularDose()">Calcular</button>
+        </div>
+
+        <p id="calcUI_resultado"></p>
+        <div class="sugestoes-box" id="calcUI_sugestoes"></div>
+
+        <div class="legend-container">
+            <p class="legend">* Importante: Não preencher a concentração do medicamento com a dose total em UI que esta mencionada em rótulos de alguns medicamentos, mas sim utilizar as concentrações em UI/mL, UI/mg e UI/mcg como mencionado na bula.</p>
+        </div>
+    </div>
+</div>
+        
+<!-- Fim Unidades Internacionais --> 
+        
+        
+<!-- Inicio Quimioterapicos -->
+        
+<div class="calculadora-container codigo-box" id="Antineoplasico" style="display: none;">
+    <div class="container">
+        <h2>Quimioterápicos</h2>
+        
+        <label class="input-label" for="animalAntineoplasico">Escolha o Animal:</label>
+        <select id="animalAntineoplasico">
+            <option value="cao">Cão</option>
+            <option value="gato">Gato</option>
+        </select>
+
+        <label class="input-label" for="pesoAntineoplasico">Peso do Animal (kg):</label>
+        <input type="number" id="pesoAntineoplasico" placeholder="Insira o peso do animal">
+
+        <label class="input-label" for="doseAntineoplasico">Dose do Medicamento (mg/m²):</label>
+        <input type="number" id="doseAntineoplasico" placeholder="Insira a dose do medicamento em mg/m²">
+
+        <label class="input-label" for="concentracaoMgAntineoplasico">Concentração do Medicamento (mg/mL):</label>
+        <div class="concentracao-container-Antineoplasico">
+            <input class="concentracao-input concentracao-input-antineoplasico" type="number" id="concentracaoMgAntineoplasico" placeholder="Insira a concentração em mg">
+            <input class="concentracao-input concentracao-input-antineoplasico" type="number" id="concentracaoMlAntineoplasico" placeholder="Insira a concentração em mL">
+        </div>
+
+        <div class="btn-container">
+            <button class="limpar-btn" onclick="limparCamposAntineoplasico()">Limpar</button>
+            <button onclick="calcularDoseAntineoplasico()">Calcular</button>
+        </div>
+
+        <p id="resultadoAntineoplasico"></p>
+    </div>
+</div>
+                
+<!-- Fim Quimioterapicos -->        
+        
+        
+<!-- Inicio Fluidoterapia --> 
+        
+<div class="calculadora-container codigo-box" id="fluidoterapia" style="display: none;">
+    <div class="container">
+        <h2>Fluidoterapia</h2>
+        
+        <label class="input-label" for="animal">Escolha o Animal:</label>
+        <select id="animal-fluidoterapia">
+            <option value="cao">Cão</option>
+            <option value="gato">Gato</option>
+        </select>
+
+        <label class="input-label" for="peso">Peso do Animal (kg):</label>
+        <input type="number" id="peso-fluidoterapia" placeholder="Insira o peso do animal">
+
+        <label class="input-label" for="desidratacao">Grau de Desidratação (%):</label>
+        <input type="number" id="desidratacao" placeholder="Insira o grau de desidratação">
+
+        <label class="input-label" for="perdas">Tipo de Perdas Contínuas:</label>
+        <select id="perdas">
+            <option value="nenhuma">Nenhuma</option>
+            <option value="vomito">Vômito</option>
+            <option value="diarreia">Diarréia</option>
+            <option value="ambos">Vômito e Diarréia</option>
+        </select>
+
+        <div class="btn-container">
+            <button class="limpar-btn" onclick="limparCamposFluidoterapia()">Limpar</button>
+            <button onclick="calcularFluidoterapia()">Calcular</button>
+        </div>
+
+        <div class="result-container">
+            <div class="result-box">
+                <h3>Rep.:</h3>
+                <p id="reposicaoResultado" class="result-label"></p>
+            </div>
+
+            <div class="result-box">
+                <h3>Man.:</h3>
+                <p id="manutencaoResultado" class="result-label"></p>
+            </div>
+
+            <div class="result-box">
+                <h3>Perdas:</h3>
+                <p id="perdasResultado" class="result-label"></p>
+            </div>
+        </div>
+
+        <p class="total-result">Total Diário: <span id="totalDiarioResultado"></span> mL</p>
+
+        <div class="legend-container">
+            <p class="legend">* Rep. - Reposição | Man. Manutenção | Perdas - Perdas Contínuas </p>
+        </div>
+    </div>
+</div>   
+        
+<!-- Fim Fluidoterapia --> 
+        
+        
+<!-- Inicio Transfusão de Sangue -->
+        
+<div class="calculadora-container codigo-box" id="transfusao-sangue" style="display: none;">
+    <div class="container">
+        <h2>Transfusão de Sangue</h2>
+        
+        <label class="input-label" for="peso">Peso do Animal (kg):</label>
+        <input type="number" id="peso-transfusao-sangue" placeholder="Insira o peso do animal">
+
+        <label class="input-label" for="vgDesejado">VG Desejado:</label>
+        <input type="number" id="vgDesejado" placeholder="Insira o VG desejado">
+
+        <label class="input-label" for="vgReceptor">VG do Receptor:</label>
+        <input type="number" id="vgReceptor" placeholder="Insira o VG do receptor">
+
+        <label class="input-label" for="vgDoador">VG do Doador:</label>
+        <input type="number" id="vgDoador" placeholder="Insira o VG do doador">
+
+        <!-- Campo de seleção para o fator -->
+        <label class="input-label" for="fator">Fator:</label>
+        <select id="fator">
+            <option value="cao">Cão (90)</option>
+            <option value="gato">Gato (70)</option>
+        </select>
+
+        <div class="btn-container">
+            <button class="limpar-btn" onclick="limparCamposTransfusao()">Limpar</button>
+            <button onclick="calcularTransfusao()">Calcular</button>
+        </div>
+
+        <p id="resultado-transfusao-sangue"></p>
+    </div>
+</div>
+
+<!-- Fim Transfusão de Sangue -->
+        
+        
+<!-- Inicio Débito Urinário --> 
+        
+<div class="calculadora-container codigo-box" id="debito-urinario" style="display: none;">
+    <div class="container">
+        <h2>Débito Urinário</h2>
+        
+        <label class="input-label" for="volume">Volume (mL):</label>
+        <input type="number" id="volume" placeholder="Insira o volume">
+
+        <label class="input-label" for="tempo">Tempo (hrs):</label>
+        <input type="number" id="tempo" placeholder="Insira o tempo">
+
+        <label class="input-label" for="peso">Peso (kg):</label>
+        <input type="number" id="peso-debito-urinario" placeholder="Insira o peso">
+
+        <label class="input-label" for="fluidoterapia">Fluidoterapia:</label>
+        <select id="option-fluidoterapia">
+            <option value="sem">Sem Fluidoterapia</option>
+            <option value="com">Com Fluidoterapia</option>
+        </select>
+
+        <div class="btn-container">
+            <button class="limpar-btn" onclick="limparCamposUrinario()">Limpar</button>
+            <button onclick="calcularDebitoUrinario()">Calcular</button>
+        </div>
+
+        <p id="resultado-debito-urinario"></p>
+    </div>
+</div>
+        
+<!-- Fim Débito Urinário --> 
+        
+        
+<!-- Inicio Gestacional --> 
+        
+<div class="calculadora-container codigo-box" id="gestacional" style="display: none;">
+    <div class="container">
+        <h2>Gestacional</h2>
+        
+        <label class="input-label" for="animal">Escolha o Animal:</label>
+        <select id="animal-gestacao">
+            <option value="Cadela Toy (Ate 5kg)">Cadela Toy (Até 5kg)</option>
+            <option value="Cadela Pequena">Cadela Pequena</option>
+            <option value="Cadela Medio/Grande">Cadela Médio/Grande</option>
+            <option value="Gata">Gata</option>
+            <optgroup label="Raças Específicas">
+                <option value="Yorkshire">Yorkshire</option>
+                <option value="Maltes">Maltes</option>
+                <option value="Pastor Alemao">Pastor Alemão</option>
+                <option value="Maine Coon">Maine Coon</option>
+            </optgroup>
+        </select>
+
+        <label class="input-label" for="periodo">Escolha o Período:</label>
+        <select id="periodo">
+            <option value="antes" selected>Antes de 35 dias</option>
+            <option value="depois">Depois de 35 dias</option>
+        </select>
+
+        <label class="input-label" for="diametro">Diâmetro (cm):</label>
+        <input type="number" id="diametro" placeholder="Insira o diâmetro da vesícula gestacional em cm">
+        <p id="diagnostico"></p>
+
+        <div class="btn-container">
+            <button class="limpar-btn" onclick="limparDadosgestacionalcg()">Limpar</button>
+            <button onclick="calcularGestacao()">Calcular</button>
+        </div>
+
+        <p id="resultado-idade-gestacional"></p>
+        <p id="resultado-dias-parto"></p>
+
+        <!-- Parágrafo para exibir a mensagem de erro -->
+        <p id="mensagem-erro" style="color: black;"></p>
+
+        <div class="legend-container">
+            <p class="legend">* Fórmulas extraídas do Ebook de Ultrassonografia Gestacional de Cadelas e Gatas da Autora: Daniela Ap. Ayres Garcia, 2020</p>
+        </div>
+    </div>
+</div>
+        
+<!-- Fim Gestacional -->  
+        
+        
+<!-- Inicio Superficie Corporea --> 
+        
+<div class="calculadora-container codigo-box" id="superficiecorporea" style="display: none;">
+    <div class="container">
+        <h2>Superfície Corpórea</h2>
+        
+        <label class="input-label" for="tipo-animal-superficiecorporea">Escolha o Animal:</label>
+        <select id="tipo-animal-superficiecorporea">
+            <option value="cao">Cão</option>
+            <option value="gato">Gato</option>
+        </select>
+
+        <label class="input-label" for="peso-animal-superficiecorporea">Peso do Animal (kg):</label>
+        <input type="number" id="peso-animal-superficiecorporea" placeholder="Insira o peso do animal">
+
+        <div class="btn-container">
+            <button class="limpar-btn" onclick="limparCamposSuperficieCorporea()">Limpar</button>
+            <button onclick="calcularSuperficieCorporea()">Calcular</button>
+        </div>
+
+        <p id="resultado-superficiecorporea"></p>
+    </div>
+</div>
+        
+<!-- Fim Superficie Corporea -->
+        
+        
+<!-- Inicio Escore de Apgar --> 
+        
+<div class="calculadora-container codigo-box" id="apgar" style="display: none;">
+    <div class="container">
+        <h2>Escore de Apgar Neonatal</h2>
+        
+        <label class="input-label" for="frequenciaCardiaca">Frequência Cardíaca:</label>
+        <select id="frequenciaCardiaca">
+            <option value="">Selecione</option>
+            <option value="2">>220 bpm (2 pontos)</option>
+            <option value="1">180 - 220 bpm (1 ponto)</option>
+            <option value="0"><180 bpm (0 pontos)</option>
+        </select>
+
+        <label class="input-label" for="esforcoRespiratorio">Esforço Respiratório:</label>
+        <select id="esforcoRespiratorio">
+            <option value="">Selecione</option>
+            <option value="2">>15 mpm (2 pontos)</option>
+            <option value="1">6 a 15 mpm (1 ponto)</option>
+            <option value="0"><6 mpm (0 pontos)</option>
+        </select>
+
+        <label class="input-label" for="motilidade">Motilidade:</label>
+        <select id="motilidade">
+            <option value="">Selecione</option>
+            <option value="2">Movimentação ativa (2 pontos)</option>
+            <option value="1">Pouca flexão (1 ponto)</option>
+            <option value="0">Flácida (0 pontos)</option>
+        </select>
+
+        <label class="input-label" for="irritabilidadeReflexa">Irritabilidade Reflexa:</label>
+        <select id="irritabilidadeReflexa">
+            <option value="">Selecione</option>
+            <option value="2">Reflexo vigoroso (2 pontos)</option>
+            <option value="1">Contração músculo facial (1 ponto)</option>
+            <option value="0">Ausente (0 pontos)</option>
+        </select>
+
+        <label class="input-label" for="coloracaoMucosas">Coloração das Mucosas:</label>
+        <select id="coloracaoMucosas">
+            <option value="">Selecione</option>
+            <option value="2">Rosada (2 pontos)</option>
+            <option value="1">Mucosas pálidas (1 ponto)</option>
+            <option value="0">Cianótico/pálido (0 pontos)</option>
+        </select>
+
+        <div class="btn-container">
+            <button class="limpar-btn" onclick="limparCamposApgar()">Limpar</button>
+            <button onclick="calcularApgar()">Calcular</button>
+        </div>
+
+        <p id="resultado-apgar"></p>
+    </div>
+</div>
+        
+<!-- Fim Escore de Apgar -->        
+
+   <div class="botoes-container">
+        <a class="botao-redirecionar" href="mailto:marcelodellamatta@icloud.com" onclick="abrirPagina('reportarErro')">Reportar Erro</a>
+        <a class="botao-redirecionar" href="https://wa.me/5543996412475" onclick="abrirPagina('falarComSuporte')">Falar com Suporte</a>
+        <a class="botao-redirecionar" href="./politica-de-privacidade.html" onclick="abrirPagina('politicaPrivacidade')">Política de Privacidade</a>
+    </div>
+        
+     <footer>
+      © 2023 Marcelo Della Matta.
+     </footer> 
+        
+        
+<!-- Inicio Script Menu -->
+        
+    <script>   
+        
+function adicionarEstiloCSS(arquivo) {
+    var linkElement = document.createElement("link");
+    linkElement.rel = "stylesheet";
+    linkElement.href = arquivo;
+    document.head.appendChild(linkElement);
+}
+
+function inserirScriptDinamicamente(url) {
+    var script = document.createElement('script');
+    script.src = url;
+    document.head.appendChild(script);
+}
+
+function mostrarCalculadora() {
+    const selecionado = document.getElementById("selecionarCalculadora").value;
+    const calculadoraBoxes = document.getElementsByClassName("codigo-box");
+
+    for (let i = 0; i < calculadoraBoxes.length; i++) {
+        if (calculadoraBoxes[i].id === 'dose-medicamentos') {
+            limparCamposMedicamentos();
+        } else if (calculadoraBoxes[i].id === 'fluidoterapia') {
+            limparCamposFluidoterapia();
+        } else if (calculadoraBoxes[i].id === 'transfusao-sangue') {
+            limparCamposTransfusao();
+        } else if (calculadoraBoxes[i].id === 'debito-urinario') {
+            limparCamposUrinario();
+        } else if (calculadoraBoxes[i].id === 'unidades-internacionais') {
+            calcUI_limparCampos();
+        } else if (calculadoraBoxes[i].id === 'Antineoplasico') {
+            limparCamposAntineoplasico();
+        } else if (calculadoraBoxes[i].id === 'gestacional') {
+            limparDadosgestacionalcg();
+        } else if (calculadoraBoxes[i].id === 'superficiecorporea') {
+            limparCamposSuperficieCorporea();
+        } else if (calculadoraBoxes[i].id === 'apgar') {
+            limparCamposApgar();
+        }
+        calculadoraBoxes[i].style.display = "none";
+    }
+
+                if (selecionado === 'dose-medicamentos') {
+                    adicionarEstiloCSS('./dose-de-medicamentos.css');
+                } else if (selecionado === 'unidades-internacionais') {
+                    adicionarEstiloCSS('./unidades-internacionais.css');
+                } else if (selecionado === 'Antineoplasico') {
+                    adicionarEstiloCSS('./quimioterapicos.css');
+                } else if (selecionado === 'fluidoterapia') {
+                    adicionarEstiloCSS('./fluidoterapia.css');
+                } else if (selecionado === 'transfusao-sangue') {
+                    adicionarEstiloCSS('./transfusao-de-sangue.css');
+                } else if (selecionado === 'debito-urinario') {
+                    adicionarEstiloCSS('./debito-urinario.css');
+                } else if (selecionado === 'gestacional') {
+                    adicionarEstiloCSS('./gestacional.css');
+                } else if (selecionado === 'superficiecorporea') {
+                    adicionarEstiloCSS('./superficie-corporea.css');
+                } else if (selecionado === 'apgar') {
+                    adicionarEstiloCSS('./escore-de-apgar.css');
+                } else {
+                    console.log('initial')
+                }
+    
+    console.log(selecionado)
+    document.getElementById(selecionado).style.display = "block";
+}
+        
+    </script>        
+        
+<!-- Fim Script Menu -->
+        
+        
+<!-- Inicio Script Login --> 
+        
+        <script>
+            
+// Função para verificar o acesso do usuário
+function verificarAcesso() {
+    var emailPermitido = verificarCookie();
+    if (!emailPermitido) {
+        // Redireciona o usuário para a página de login se não tiver permissão
+        window.location.href = "index.html";
+    }
+}
+
+// Função auxiliar para verificar o cookie e retornar o e-mail permitido
+function verificarCookie() {
+    var email = obterCookie("email");
+    var emailsPermitidos = [
+        // E-mails adicionados no topo da lista
+    "marcelodellamatta@icloud.com", "luizacquintela@gmail.com", "veterinariodacidade@gmail.com", "andedvet@gmail.com", "martajuliane@hotmail.com",
+
+        
+        
+        // Demais e-mails abaixo
+        
+"66662@upf.br", "acmvt@hotmail.com", "acsasofia04@gmail.com", "alci3910@gmail.com", "aleuchoa@gmail.com",
+"amandamathias22@hotmail.com", "amandaitakay@gmail.com", "ana.balotin@hotmail.com", "anaflavia5567@outlook.com", "andreiasilvasilva3033@gmail.com",
+"andreleecitti5@gmail.com", "anelenox@gmail.com", "anaflavia5567@outlook.com", "bonilhalizania@gmail.com", "barbara.carvejani@hotmail.com",
+"bibi-munhoz@hotmail.com", "baldin.re@gmail.com", "brida.mv@hotmail.com", "casadocampoararenda@gmail.com", "carolinalandim2@gmail.com",
+"carloshenriquebiovet@gmail.com", "cesaripabline@gmail.com", "clarameiole@gmail.com", "clara.santpereira@gmail.com", "cr.maia@icloud.com",
+"crismultini@yahoo.com.br", "cristinirodrigues@yahoo.com", "danielle.adapec@hotmail.com", "daniellemenezzes@gmail.com", "debora.ruckl@hotmail.com",
+"deborabuniotti@hotmail.com", "deni.rodrigues.silva20@gmail.com", "detoni.adolfo@hotmail.com", "dienifersteffen99@gmail.com", "drmatheuscs@gmail.com",
+"eduardaleticiata14@gmail.com", "eduardobreuer@outlook.com", "erniverita@yahoo.com.br", "essenciasdaisis@gmail.com", "estrelasdog1263@gmail.com",
+"fabcevefc@gmail.com", "fabianna_ssouza@hotmail.com", "felipebenedicto.8@gmail.com", "felipecap@hotmail.com", "ffsnando4@gmail.com",
+"fernandayanes2011@hotmail.com", "flaviasimoesaraujo@gmail.com", "franciellitendolo@outlook.com", "gabrielagamap@outlook.com", "gabrielhenriquegontijo@hotmail.com",
+"giovannarubio0@gmail.com", "giiovannantunes@gmail.com", "gi.ca84@gmail.com", "giselepessanha.santos@gmail.com", "gragramatiuzzo@hotmail.com",
+"hayashikaren04@gmail.com", "henriveras@yahoo.com.br", "ingrydmedicivet@gmail.com", "iocelmafreitas@yahoo.com.br",
+"itavetmg@gmail.com", "jenny.biovet@uol.com.br", "jessica.lopes.monteiro@hotmail.com", "jessicamatiko765@gmail.com", "kamillamarcelino@live.com",
+"katerineyoneda@hotmail.com", "kikigoi@hotmail.com", "kamillamarcelino@live.com", "lala_mmc@hotmail.com", "larissa.de.lena@hotmail.com",
+"laura_calixto123@hotmail.com", "lubuenoserafim@outlook.com", "mariadudavida0@gmail.com", "mariana96.marchiori82@gmail.com", "mariana98moreira@hotmail.com",
+"mariaasilva2@unigranrio.br", "marciaalmeida0186@gmail.com", "marucha.n.28@hotmail.com", "mayoshidavet@gmail.com", "mcfcramalho@gmail.com",
+"micheleperola@outlook.com", "millenaneri8@gmail.com", "millanascimentocury@hotmail.com", "monicabkienzle@gmail.com", "materesa@terra.com.br",
+"piress.cintia@hotmail.com", "pires.cintia@hotmail.com", "rafaelramalhogo@gmail.com", "rafaelcoutinhovet@gmail.com", "rayanalucena5@gmail.com",
+"rosalina.dias@icloud.com", "roseanevi@outlook.com", "rpoliveiradasilva@gmail.com", "salete.dierings@gmail.com", "samaraln90@gmail.com",
+"sofia.rib.vet@gmail.com", "souzalidia93@outlook.com", "ssmartins.2012@hotmail.com", "tatianepedrelli@hotmail.com", "tatychapetta@gmail.com",
+"thaynaramarquesvin16@gmail.com", "tomazlima83@yahoo.com", "vanezamedsant@gmail.com", "veterinariabarleta@gmail.com", "victordecasttro@gmail.com",
+"vitoriabornacchi@gmail.com", "vitoriasandypires2014@gmail.com", "vivianebgimenez@uol.com.br", "viviane.olivr@gmail.com", "wadnads@hotmail.com",
+"welingtongmlima@gmail.com",   
+
+
+"manoelagerlach@gmail.com", "lorenagomesadm438@gmail.com", "contato@dradenisechiquetti.com.br"       
+        
+        
+        
+    ];
+
+    if (emailsPermitidos.includes(email)) {
+        return email;
+    } else {
+        return null;
+    }
+}
+
+// Função auxiliar para obter o valor de um cookie
+function obterCookie(nome) {
+    var valor = document.cookie.match("(^|;)\\s*" + nome + "\\s*=\\s*([^;]+)");
+    return valor ? valor.pop() : "";
+}
+        
+        </script>
+        
+<!-- Fim Script Login --> 
+        
+            
+    </div>
+    
+    <script src="./dose-de-medicamentos.js"></script>
+    <script src="./unidades-internacionais.js"></script>
+    <script src="./quimioterapicos.js"></script>
+    <script src="./fluidoterapia.js"></script>
+    <script src="./transfusao-de-sangue.js"></script>
+    <script src="./debito-urinario.js"></script>
+    <script src="./gestacional.js"></script>
+    <script src="./superficie-corporea.js"></script>
+    <script src="./escore-de-apgar.js"></script>  
+       
+    
+</body>
+
+</html>

@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <title>Política de Privacidade</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script>
+        document.addEventListener("contextmenu", function(e) {
+            e.preventDefault();
+        });
+
+        document.addEventListener("keydown", function(e) {
+            if (e.ctrlKey && (e.keyCode === 85 || e.keyCode === 73)) {
+                e.preventDefault();
+            }
+        });
+    </script>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        max-width: 664px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    h2 {
+        font-size: 24px;
+        margin-top: 0;
+        color: #333;
+        text-align: center;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #333;
+    }
+
+    select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-bottom: 4px;
+        /* Afastar a caixa de seleção do texto abaixo */
+        font-size: 15px;
+    }
+
+    .codigo-box {
+        padding: 20px;
+        background-color: #f5f5f5;
+        border-radius: 5px;
+        display: none;
+    }
+
+    .codigo-box.show {
+        display: block;
+    }
+
+    /* Estilo para o container do select */
+    .select-container {
+        margin-bottom: 12px;
+        padding: 20px;
+        background-color: #f5f5f5;
+        border-radius: 5px;
+    }
+
+    /* Estilo para o select */
+    .select-container select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 15px;
+    }
+
+    .politica {
+        display: none;
+    }
+
+    .politica-text {
+        text-align: justify;
+        line-height: 1.5;
+        font-size: 15px;
+        color: #333;
+    }
+
+    .wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 100vh; /* Garante que o footer fique no final da página */
+    }
+
+    footer {
+        margin-top: 12px;
+        color: #666;
+        font-size: 12px;
+        background-color: #f5f5f5;
+        padding: 10px;
+        text-align: center;
+        border-top: 0px solid #ccc;
+    }
+
+    .botao-voltar {
+        font-size: 15px;
+        background-color: #f5f5f5;
+        color: #333;
+        border: 0px solid #ccc;
+        padding: 8px 16px;
+        border-radius: 5px;
+        cursor: pointer;
+        width: 100%; /* O botão ocupará toda a largura disponível */
+        margin-top: 10px; /* Adicione uma margem para melhor posicionamento */
+    }
+</style>
+
+</head>
+
+<body>
+    <div class="container">
+        <h2>Política de Privacidade</h2>
+        <div class="select-container">
+            <label for="selecionarTopico">Selecione um Tópico:</label>
+            <select id="selecionarTopico" onchange="mostrarPolitica()">
+                <option value="1" selected>1. Introdução</option>
+                <option value="2">2. Informações Coletadas</option>
+                <option value="3">3. Finalidade da Coleta</option>
+                <option value="4">4. Base Legal para o Tratamento de Dados</option>
+                <option value="5">5. Uso dos Dados</option>
+                <option value="6">6. Compartilhamento de Dados</option>
+                <option value="7">7. Cookies e Tecnologias de Rastreamento</option>
+                <option value="8">8. Segurança</option>
+                <option value="9">9. Retenção de Dados</option>
+                <option value="10">10. Direitos do Usuário</option>
+                <option value="11">11. Consentimento e Retirada do Consentimento</option>
+                <option value="12">12. Transferência Internacional de Dados</option>
+                <option value="13">13. Atualizações na Política de Privacidade</option>
+                <option value="14">14. Contato</option>
+            </select>
+        </div>
+
+<div class="politica" id="politica1">
+    <div class="politica-text">
+        <div class="politica-container codigo-box" id="1" style="display: block;">
+            <h3>1. Introdução</h3>
+            <p>
+                A presente Política de Privacidade tem como objetivo informar aos usuários sobre como a Calculadora Inteligente Veterinária coleta, utiliza, armazena e protege os dados pessoais fornecidos por eles durante a utilização da plataforma. A privacidade e a segurança dos dados dos usuários são fundamentais para nós, e estamos empenhados em proteger a confidencialidade e a integridade das informações pessoais fornecidas.
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="politica" id="politica2">
+    <div class="politica-text">
+        <div class="politica-container codigo-box" id="2" style="display: block;">
+            <h3>2. Informações Coletadas:</h3>
+            <p>A Calculadora Inteligente Veterinária pode coletar informações pessoais dos usuários quando estes interagem com a plataforma e preenchem o formulário de cadastro. As informações coletadas podem incluir, mas não se limitam a:</p>
+            <ul>
+                <li>Endereço de e-mail</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="politica" id="politica3">
+    <div class="politica-text">
+        <div class="politica-container codigo-box" id="3" style="display: block;">
+            <h3>3. Finalidade da Coleta:</h3>
+            <p>As informações pessoais coletadas são utilizadas com a finalidade de proporcionar uma experiência personalizada e eficiente aos usuários da Calculadora Inteligente Veterinária. Esses dados podem ser utilizados para:</p>
+            <ul>
+                <li>Criar e gerenciar a conta do usuário na plataforma</li>
+                <li>Permitir o acesso aos recursos e funcionalidades do serviço</li>
+                <li>Fornecer suporte ao cliente e responder a dúvidas e solicitações</li>
+                <li>Enviar informações sobre serviços, atualizações e novidades relevantes</li>
+                <li>Personalizar a experiência do usuário com base em suas preferências e interesses</li>
+                <li>Realizar pesquisas de mercado e análise de dados para melhorar o serviço</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="politica" id="politica4">
+    <div class="politica-text">
+        <div class="politica-container codigo-box" id="4" style="display: block;">
+            <h3>4. Base Legal para o Tratamento de Dados:</h3>
+            <p>O tratamento dos dados pessoais dos usuários pela Calculadora Inteligente Veterinária é realizado com base em uma ou mais das seguintes bases legais:</p>
+            <ul>
+                <li>Consentimento do usuário para o tratamento dos seus dados</li>
+                <li>Cumprimento de obrigações contratuais com o usuário</li>
+                <li>Interesse legítimo da Calculadora Inteligente Veterinária para fornecer e aprimorar o serviço</li>
+                <li>Cumprimento de obrigações legais e regulatórias aplicáveis</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="politica" id="politica5">
+    <div class="politica-text">
+        <div class="politica-container codigo-box" id="5" style="display: block;">
+            <h3>5. Uso dos Dados:</h3>
+            <p>A Calculadora Inteligente Veterinária utilizará os dados pessoais coletados para oferecer um serviço de qualidade, personalizado e seguro aos usuários. As informações podem ser utilizadas para:</p>
+            <ul>
+                <li>Melhorar e otimizar a plataforma e os serviços oferecidos</li>
+                <li>Enviar notificações sobre o serviço, atualizações e novidades relevantes</li>
+                <li>Personalizar a experiência do usuário com base em suas preferências e histórico de uso</li>
+                <li>Realizar pesquisas e análises para aprimorar o serviço e entender as necessidades dos usuários</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="politica" id="politica6">
+    <div class="politica-text">
+        <div class="politica-container codigo-box" id="6" style="display: block;">
+            <h3>6. Compartilhamento de Dados:</h3>
+            <p>A Calculadora Inteligente Veterinária poderá compartilhar os dados pessoais dos usuários com terceiros, somente quando necessário e de acordo com as finalidades descritas nesta Política de Privacidade. Os terceiros podem incluir:</p>
+            <ul>
+                <li>Prestadores de serviços que auxiliam na operação e manutenção do serviço</li>
+                <li>Parceiros comerciais para fins de marketing e promoções conjuntas</li>
+                <li>Autoridades governamentais, quando exigido por lei ou por determinação judicial</li>
+            </ul>
+            <p>O compartilhamento de dados será realizado com o máximo de segurança e em conformidade com as leis aplicáveis de proteção de dados.</p>
+        </div>
+    </div>
+</div>
+
+<div class="politica" id="politica7">
+    <div class="politica-text">
+        <div class="politica-container codigo-box" id="7" style="display: block;">
+            <h3>7. Cookies e Tecnologias de Rastreamento:</h3>
+            <p>A Calculadora Inteligente Veterinária utiliza cookies e outras tecnologias de rastreamento para coletar informações sobre o uso da plataforma pelos usuários. Os cookies são pequenos arquivos de texto que são armazenados no dispositivo do usuário e permitem que o serviço reconheça o usuário em visitas subsequentes.</p>
+            <p>Essas tecnologias são utilizadas para diversos fins, como:</p>
+            <ul>
+                <li>Acompanhar a navegação do usuário na plataforma e entender como ela é utilizada</li>
+                <li>Personalizar a experiência do usuário, oferecendo conteúdo e funcionalidades relevantes</li>
+                <li>Realizar análises e estatísticas para melhorar o serviço</li>
+            </ul>
+            <p>Os usuários têm a opção de desativar os cookies em seus navegadores, mas é importante ressaltar que isso pode afetar a funcionalidade e a experiência de uso da plataforma.</p>
+        </div>
+    </div>
+</div>
+
+<div class="politica" id="politica8">
+    <div class="politica-text">
+        <div class="politica-container codigo-box" id="8" style="display: block;">
+            <h3>8. Segurança:</h3>
+            <p>A Calculadora Inteligente Veterinária emprega medidas de segurança para proteger os dados pessoais dos usuários contra acesso não autorizado, divulgação ou destruição. Utilizamos práticas adequadas de segurança da informação, como criptografia de dados e controle de acesso, para garantir a proteção das informações fornecidas.</p>
+            <p>É importante ressaltar que nenhum método de transmissão de dados pela internet ou método de armazenamento eletrônico é totalmente seguro. Embora nos esforcemos para proteger os dados pessoais dos usuários, não podemos garantir a segurança absoluta das informações transmitidas ou armazenadas na plataforma.</p>
+        </div>
+    </div>
+</div>
+
+<div class="politica" id="politica9">
+    <div class="politica-text">
+        <div class="politica-container codigo-box" id="9" style="display: block;">
+            <h3>9. Retenção de Dados:</h3>
+            <p>A Calculadora Inteligente Veterinária manterá os dados pessoais dos usuários pelo período necessário para cumprir as finalidades descritas nesta Política de Privacidade, a menos que uma retenção mais longa seja exigida ou permitida por lei.</p>
+            <p>Quando os dados pessoais não forem mais necessários para as finalidades para as quais foram coletados, eles serão excluídos ou anonimizados, a menos que sua retenção seja necessária para cumprir obrigações legais, resolver disputas, manter a segurança do serviço ou para fins de arquivamento histórico.</p>
+        </div>
+    </div>
+</div>
+
+<div class="politica" id="politica10">
+    <div class="politica-text">
+        <div class="politica-container codigo-box" id="10" style="display: block;">
+            <h3>10. Direitos do Usuário:</h3>
+            <p>Os usuários têm o direito de acessar, corrigir, atualizar, excluir e transferir seus dados pessoais. Caso desejem exercer esses direitos, podem entrar em contato conosco por meio dos canais de comunicação fornecidos nesta Política de Privacidade.</p>
+            <p>Além disso, os usuários têm o direito de retirar seu consentimento para o tratamento de seus dados pessoais a qualquer momento, quando o tratamento for baseado em consentimento.</p>
+        </div>
+    </div>
+</div>
+
+<div class="politica" id="politica11">
+    <div class="politica-text">
+        <div class="politica-container codigo-box" id="11" style="display: block;">
+            <h3>11. Consentimento e Retirada do Consentimento:</h3>
+            <p>Ao utilizar a Calculadora Inteligente Veterinária, o usuário consente expressamente com a coleta, uso e tratamento de seus dados pessoais conforme descrito nesta Política de Privacidade. O consentimento pode ser revogado a qualquer momento, mediante solicitação do usuário.</p>
+            <p>A retirada do consentimento pode resultar na impossibilidade de acesso e utilização de determinadas funcionalidades da plataforma.</p>
+        </div>
+    </div>
+</div>
+        
+<div class="politica" id="politica12">
+    <div class="politica-text">
+        <div class="politica-container codigo-box" id="12" style="display: block;">
+            <h3>12. Transferência Internacional de Dados:</h3>
+            <p>Os dados pessoais dos usuários podem ser transferidos para outros países além do país em que foram coletados. Essas transferências poderão ocorrer caso seja necessário compartilhar os dados com parceiros comerciais ou prestadores de serviços localizados fora do país de origem do usuário.</p>
+            <p>A Calculadora Inteligente Veterinária tomará todas as medidas necessárias para garantir que as transferências internacionais de dados sejam realizadas em conformidade com as leis aplicáveis de proteção de dados e que os dados permaneçam protegidos.</p>
+        </div>
+    </div>
+</div>
+
+<div class="politica" id="politica13">
+    <div class="politica-text">
+        <div class="politica-container codigo-box" id="13" style="display: block;">
+            <h3>13. Atualizações na Política de Privacidade:</h3>
+            <p>Esta Política de Privacidade poderá ser atualizada periodicamente para refletir mudanças na forma como a Calculadora Inteligente Veterinária coleta, utiliza e protege os dados pessoais dos usuários. As atualizações serão publicadas na plataforma e o usuário será notificado sobre quaisquer alterações relevantes.</p>
+        </div>
+    </div>
+</div>
+
+<div class="politica" id="politica14">
+    <div class="politica-text">
+        <div class="politica-container codigo-box" id="14" style="display: block;">
+            <h3>14. Contato:</h3>
+            <p>Caso o usuário tenha alguma dúvida, preocupação ou solicitação relacionada à privacidade dos dados, ele poderá entrar em contato conosco por meio dos canais de comunicação disponibilizados na plataforma.</p>
+        </div>
+    </div>
+</div>
+        
+<button class="botao-voltar" onclick="voltar()">Calculadora Inteligente Veterinária</button>
+
+     <footer>
+      © 2023 Marcelo Della Matta.
+     </footer>  
+    
+        
+    <script>
+        function mostrarPolitica() {
+            var selecao = document.getElementById('selecionarTopico').value;
+            var politicas = document.getElementsByClassName('politica');
+
+            for (var i = 0; i < politicas.length; i++) {
+                politicas[i].style.display = 'none';
+            }
+
+            if (selecao !== '0') {
+                var politicaSelecionada = document.getElementById('politica' + selecao);
+                politicaSelecionada.style.display = 'block';
+            }
+        }
+
+        function voltar() {
+            window.history.back();
+        }
+
+        // Definir a div de introdução (ID politica1) para ser exibida por padrão
+        document.addEventListener("DOMContentLoaded", function() {
+            var politicaIntroducao = document.getElementById("politica1");
+            politicaIntroducao.style.display = "block";
+        });
+    </script>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+  
+<!-- Inicio Script Login -->
+    
+<script>
+    document.addEventListener("contextmenu", function (e) {
+        e.preventDefault();
+    });
+
+    document.addEventListener("keydown", function (e) {
+        if (e.ctrlKey && (e.keyCode === 85 || e.keyCode === 73)) {
+            e.preventDefault();
+        }
+    });
+
+    // Função para definir o cookie após o login bem-sucedido
+    function definirCookie(email) {
+        // Definir o cookie com o email do usuário válido por 30 dias
+        var dataExpiracao = new Date();
+        dataExpiracao.setDate(dataExpiracao.getDate() + 15);
+        document.cookie = "email=" + email + ";expires=" + dataExpiracao.toUTCString() + ";path=/";
+    }
+
+    // Função para verificar o cookie e redirecionar o usuário para a página protegida, se existir
+    function verificarCookie() {
+        var email = obterCookie("email");
+        if (email) {
+            var emailsPermitidos = [
+                // E-mails adicionados no topo da lista
+    "marcelodellamatta@icloud.com", "luizacquintela@gmail.com", "veterinariodacidade@gmail.com", "andedvet@gmail.com", "martajuliane@hotmail.com",
+
+
+                // Demais e-mails abaixo
+                
+"66662@upf.br", "acmvt@hotmail.com", "acsasofia04@gmail.com", "alci3910@gmail.com", "aleuchoa@gmail.com",
+"amandamathias22@hotmail.com", "amandaitakay@gmail.com", "ana.balotin@hotmail.com", "anaflavia5567@outlook.com", "andreiasilvasilva3033@gmail.com",
+"andreleecitti5@gmail.com", "anelenox@gmail.com", "anaflavia5567@outlook.com", "bonilhalizania@gmail.com", "barbara.carvejani@hotmail.com",
+"bibi-munhoz@hotmail.com", "baldin.re@gmail.com", "brida.mv@hotmail.com", "casadocampoararenda@gmail.com", "carolinalandim2@gmail.com",
+"carloshenriquebiovet@gmail.com", "cesaripabline@gmail.com", "clarameiole@gmail.com", "clara.santpereira@gmail.com", "cr.maia@icloud.com",
+"crismultini@yahoo.com.br", "cristinirodrigues@yahoo.com", "danielle.adapec@hotmail.com", "daniellemenezzes@gmail.com", "debora.ruckl@hotmail.com",
+"deborabuniotti@hotmail.com", "deni.rodrigues.silva20@gmail.com", "detoni.adolfo@hotmail.com", "dienifersteffen99@gmail.com", "drmatheuscs@gmail.com",
+"eduardaleticiata14@gmail.com", "eduardobreuer@outlook.com", "erniverita@yahoo.com.br", "essenciasdaisis@gmail.com", "estrelasdog1263@gmail.com",
+"fabcevefc@gmail.com", "fabianna_ssouza@hotmail.com", "felipebenedicto.8@gmail.com", "felipecap@hotmail.com", "ffsnando4@gmail.com",
+"fernandayanes2011@hotmail.com", "flaviasimoesaraujo@gmail.com", "franciellitendolo@outlook.com", "gabrielagamap@outlook.com", "gabrielhenriquegontijo@hotmail.com",
+"giovannarubio0@gmail.com", "giiovannantunes@gmail.com", "gi.ca84@gmail.com", "giselepessanha.santos@gmail.com", "gragramatiuzzo@hotmail.com",
+"hayashikaren04@gmail.com", "henriveras@yahoo.com.br", "ingrydmedicivet@gmail.com", "iocelmafreitas@yahoo.com.br",
+"itavetmg@gmail.com", "jenny.biovet@uol.com.br", "jessica.lopes.monteiro@hotmail.com", "jessicamatiko765@gmail.com", "kamillamarcelino@live.com",
+"katerineyoneda@hotmail.com", "kikigoi@hotmail.com", "kamillamarcelino@live.com", "lala_mmc@hotmail.com", "larissa.de.lena@hotmail.com",
+"laura_calixto123@hotmail.com", "lubuenoserafim@outlook.com", "mariadudavida0@gmail.com", "mariana96.marchiori82@gmail.com", "mariana98moreira@hotmail.com",
+"mariaasilva2@unigranrio.br", "marciaalmeida0186@gmail.com", "marucha.n.28@hotmail.com", "mayoshidavet@gmail.com", "mcfcramalho@gmail.com",
+"micheleperola@outlook.com", "millenaneri8@gmail.com", "millanascimentocury@hotmail.com", "monicabkienzle@gmail.com", "materesa@terra.com.br",
+"piress.cintia@hotmail.com", "pires.cintia@hotmail.com", "rafaelramalhogo@gmail.com", "rafaelcoutinhovet@gmail.com", "rayanalucena5@gmail.com",
+"rosalina.dias@icloud.com", "roseanevi@outlook.com", "rpoliveiradasilva@gmail.com", "salete.dierings@gmail.com", "samaraln90@gmail.com",
+"sofia.rib.vet@gmail.com", "souzalidia93@outlook.com", "ssmartins.2012@hotmail.com", "tatianepedrelli@hotmail.com", "tatychapetta@gmail.com",
+"thaynaramarquesvin16@gmail.com", "tomazlima83@yahoo.com", "vanezamedsant@gmail.com", "veterinariabarleta@gmail.com", "victordecasttro@gmail.com",
+"vitoriabornacchi@gmail.com", "vitoriasandypires2014@gmail.com", "vivianebgimenez@uol.com.br", "viviane.olivr@gmail.com", "wadnads@hotmail.com",
+"welingtongmlima@gmail.com",
+
+
+"manoelagerlach@gmail.com", "lorenagomesadm438@gmail.com", "contato@dradenisechiquetti.com.br"                     
+
+
+
+              
+            ];
+
+            if (emailsPermitidos.includes(email)) {
+                window.location.href = "homepage.html"; // Redireciona para a página desejada
+            } else {
+                alert("E-mail não autorizado. Insira um e-mail válido registrado.");
+            }
+        }
+    }
+
+    // Função para validar o e-mail do formulário de login
+    function validarEmail() {
+        var email = document.getElementById('email').value;
+        var emailsPermitidos = [
+            // E-mails adicionados no topo da lista
+   "marcelodellamatta@icloud.com", "luizacquintela@gmail.com", "veterinariodacidade@gmail.com", "andedvet@gmail.com", "martajuliane@hotmail.com",
+
+
+            // Demais e-mails abaixo
+            
+"66662@upf.br", "acmvt@hotmail.com", "acsasofia04@gmail.com", "alci3910@gmail.com", "aleuchoa@gmail.com",
+"amandamathias22@hotmail.com", "amandaitakay@gmail.com", "ana.balotin@hotmail.com", "anaflavia5567@outlook.com", "andreiasilvasilva3033@gmail.com",
+"andreleecitti5@gmail.com", "anelenox@gmail.com", "anaflavia5567@outlook.com", "bonilhalizania@gmail.com", "barbara.carvejani@hotmail.com",
+"bibi-munhoz@hotmail.com", "baldin.re@gmail.com", "brida.mv@hotmail.com", "casadocampoararenda@gmail.com", "carolinalandim2@gmail.com",
+"carloshenriquebiovet@gmail.com", "cesaripabline@gmail.com", "clarameiole@gmail.com", "clara.santpereira@gmail.com", "cr.maia@icloud.com",
+"crismultini@yahoo.com.br", "cristinirodrigues@yahoo.com", "danielle.adapec@hotmail.com", "daniellemenezzes@gmail.com", "debora.ruckl@hotmail.com",
+"deborabuniotti@hotmail.com", "deni.rodrigues.silva20@gmail.com", "detoni.adolfo@hotmail.com", "dienifersteffen99@gmail.com", "drmatheuscs@gmail.com",
+"eduardaleticiata14@gmail.com", "eduardobreuer@outlook.com", "erniverita@yahoo.com.br", "essenciasdaisis@gmail.com", "estrelasdog1263@gmail.com",
+"fabcevefc@gmail.com", "fabianna_ssouza@hotmail.com", "felipebenedicto.8@gmail.com", "felipecap@hotmail.com", "ffsnando4@gmail.com",
+"fernandayanes2011@hotmail.com", "flaviasimoesaraujo@gmail.com", "franciellitendolo@outlook.com", "gabrielagamap@outlook.com", "gabrielhenriquegontijo@hotmail.com",
+"giovannarubio0@gmail.com", "giiovannantunes@gmail.com", "gi.ca84@gmail.com", "giselepessanha.santos@gmail.com", "gragramatiuzzo@hotmail.com",
+"hayashikaren04@gmail.com", "henriveras@yahoo.com.br", "ingrydmedicivet@gmail.com", "iocelmafreitas@yahoo.com.br",
+"itavetmg@gmail.com", "jenny.biovet@uol.com.br", "jessica.lopes.monteiro@hotmail.com", "jessicamatiko765@gmail.com", "kamillamarcelino@live.com",
+"katerineyoneda@hotmail.com", "kikigoi@hotmail.com", "kamillamarcelino@live.com", "lala_mmc@hotmail.com", "larissa.de.lena@hotmail.com",
+"laura_calixto123@hotmail.com", "lubuenoserafim@outlook.com", "mariadudavida0@gmail.com", "mariana96.marchiori82@gmail.com", "mariana98moreira@hotmail.com",
+"mariaasilva2@unigranrio.br", "marciaalmeida0186@gmail.com", "marucha.n.28@hotmail.com", "mayoshidavet@gmail.com", "mcfcramalho@gmail.com",
+"micheleperola@outlook.com", "millenaneri8@gmail.com", "millanascimentocury@hotmail.com", "monicabkienzle@gmail.com", "materesa@terra.com.br",
+"piress.cintia@hotmail.com", "pires.cintia@hotmail.com", "rafaelramalhogo@gmail.com", "rafaelcoutinhovet@gmail.com", "rayanalucena5@gmail.com",
+"rosalina.dias@icloud.com", "roseanevi@outlook.com", "rpoliveiradasilva@gmail.com", "salete.dierings@gmail.com", "samaraln90@gmail.com",
+"sofia.rib.vet@gmail.com", "souzalidia93@outlook.com", "ssmartins.2012@hotmail.com", "tatianepedrelli@hotmail.com", "tatychapetta@gmail.com",
+"thaynaramarquesvin16@gmail.com", "tomazlima83@yahoo.com", "vanezamedsant@gmail.com", "veterinariabarleta@gmail.com", "victordecasttro@gmail.com",
+"vitoriabornacchi@gmail.com", "vitoriasandypires2014@gmail.com", "vivianebgimenez@uol.com.br", "viviane.olivr@gmail.com", "wadnads@hotmail.com",
+"welingtongmlima@gmail.com",
+
+
+"manoelagerlach@gmail.com", "lorenagomesadm438@gmail.com", "contato@dradenisechiquetti.com.br"               
+
+
+          
+
+        ];
+
+        if (emailsPermitidos.includes(email)) {
+            definirCookie(email); // Configura o cookie com o e-mail permitido
+            window.location.href = "homepage.html"; // Redireciona para a página desejada
+            return false; // Evita o envio do formulário
+        } else {
+            alert("E-mail não autorizado. Insira um e-mail válido registrado.");
+            return false; // Evita o envio do formulário
+        }
+    }
+
+    // Função auxiliar para obter o valor de um cookie
+    function obterCookie(nome) {
+        var valor = document.cookie.match("(^|;)\\s*" + nome + "\\s*=\\s*([^;]+)");
+        return valor ? valor.pop() : "";
+    }
+</script>
+    
+<!-- Fim Script Login --> 
+    
+    
+    
+<title>Calculadora Veterinária - Login</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+
+    
+<!-- Inicio CSS Principal -->    
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        background-color: #f5f5f5;
+    }
+
+    .container {
+        max-width: 400px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    h2 {
+        margin-top: 0;
+        color: #333;
+    }
+
+    input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+    }
+
+    .whatsapp-link {
+        display: block;
+        margin-top: 20px;
+        color: #333;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 12px;
+        text-transform: uppercase;
+    }
+
+    .whatsapp-link:hover {
+        text-decoration: underline;
+    }
+
+    button {
+        font-size: 18px;
+        background-color: #4caf50;
+        color: white;
+        padding: 14px;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+
+    button:hover {
+        background-color: #45A049;
+    }
+
+    .legend-container {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .legend {
+        font-size: 10px;
+        color: #666;
+        text-align: left;
+    }
+</style>
+<!-- Fim CSS Principal -->
+ 
+    
+    
+</head>
+    
+    
+<!-- Inicio Body -->    
+<body onload="verificarCookie()">
+    <div class="container">
+        <h2>Calculadora Veterinária</h2>
+        <form onsubmit="return validarEmail()">
+            <input type="email" id="email" name="email" placeholder="Insira o email de compra para validar" required>
+            <button type="submit">Entrar</button>
+        </form>
+
+        <a href="https://wa.me/5543996412475" class="whatsapp-link" target="_blank">Não consigo acessar</a>
+
+        <div class="legend-container">
+            <p class="legend">* Se a sua compra foi realizada recentemente, por favor, aguarde um prazo de até 2 horas para que ocorra a atualização do nosso banco de dados e, assim, o email de confirmação da compra possa ser enviado com sucesso.</p>
+        </div>
+    </div>    
+<!-- Fim Body -->
+  
+        
+</body>
+    
+</html>
