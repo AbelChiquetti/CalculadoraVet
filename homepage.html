@@ -148,7 +148,7 @@
         text-decoration: none;
         font-size: 12px;
         margin: 0 5px;
-
+        
         /* Centraliza o conteúdo (texto) na vertical e horizontal */
         display: flex;
         align-items: center;
@@ -210,7 +210,6 @@
 
     <p>Contamos com sua colaboração para utilizar essa ferramenta de forma responsável e segura, visando sempre o bem-estar e a saúde dos animais atendidos. Caso precise de qualquer orientação ou esclarecimento, nossa equipe estará à disposição para ajudá-lo.</p>
 
-   
 </div>       
         
 <!-- Fim Página Principal -->        
@@ -270,21 +269,25 @@
 <div class="calculadora-container codigo-box" id="unidades-internacionais" style="display: none;">
     <div class="container">
         <h2>Unidades Internacionais (UI)</h2>
-        
         <label class="input-label" for="calcUI_peso">Peso do Animal (kg):</label>
         <input type="number" id="calcUI_peso" placeholder="Insira o peso do animal">
 
         <label class="input-label" for="calcUI_dose">Dose do Medicamento (UI):</label>
-        <input type="number" id="calcUI_dose" placeholder="Insira a dose do medicamento em UI">
+        <input type="text" id="calcUI_dose" placeholder="Insira a dose do medicamento em UI" oninput="aplicarMascara(this)">
 
         <label class="input-label">Concentração do Medicamento:</label>
         <div class="concentracao-container">
-            <input class="concentracao-input-unidadeinternacionais" type="number" id="calcUI_concentracao" placeholder="Insira a concentração em UI/mL">
+            <input class="concentracao-input-unidadeinternacionais" type="text" id="calcUI_concentracao" placeholder="Insira a concentração em UI" oninput="aplicarMascara(this)">
             <select class="concentracao-unidade" id="calcUI_concentracaoUnidade">
                 <option value="UI/mL">UI/mL</option>
                 <option value="UI/mg">UI/mg</option>
                 <option value="UI/mcg">UI/mcg</option>
             </select>
+        </div>
+
+        <!-- Caixa para inserir a concentração em mL (sempre visível) -->
+        <div class="concentracao-container" id="calcUI_concentracaoMlContainer">
+            <input class="concentracao-input-unidadeinternacionais" type="number" id="calcUI_concentracaoMl" placeholder="Insira a concentração em mL">
         </div>
 
         <!-- Campos para digitar o valor em mg/mL (somente visível quando UI/mg estiver selecionado) -->
@@ -304,10 +307,6 @@
 
         <p id="calcUI_resultado"></p>
         <div class="sugestoes-box" id="calcUI_sugestoes"></div>
-
-        <div class="legend-container">
-            <p class="legend">* Importante: Não preencher a concentração do medicamento com a dose total em UI que esta mencionada em rótulos de alguns medicamentos, mas sim utilizar as concentrações em UI/mL, UI/mg e UI/mcg como mencionado na bula.</p>
-        </div>
     </div>
 </div>
         
@@ -614,7 +613,7 @@
 <!-- Fim Escore de Apgar -->        
 
    <div class="botoes-container">
-        <a class="botao-redirecionar" href="mailto:marcelodellamatta@icloud.com" onclick="abrirPagina('reportarErro')">Reportar Erro</a>
+       <a class="botao-redirecionar" href="./updates-recentes.html" onclick="abrirPagina('UpdatesRecentes')">Atualizações</a>
         <a class="botao-redirecionar" href="https://wa.me/5543996412475" onclick="abrirPagina('falarComSuporte')">Falar com Suporte</a>
         <a class="botao-redirecionar" href="./politica-de-privacidade.html" onclick="abrirPagina('politicaPrivacidade')">Política de Privacidade</a>
     </div>
@@ -717,14 +716,45 @@ function verificarCookie() {
     var email = obterCookie("email");
     var emailsPermitidos = [
         // E-mails adicionados no topo da lista
-    "marcelodellamatta@icloud.com", "abelcpl86@gmail.com", "veterinariodacidade@gmail.com", "andedvet@gmail.com", "martajuliane@hotmail.com",
+    "marcelodellamatta@icloud.com", "luizacquintela@gmail.com", "veterinariodacidade@gmail.com", "andedvet@gmail.com", "martajuliane@hotmail.com",
 
 
+                // Demais e-mails abaixo
+        
+"66662@upf.br", "acmvt@hotmail.com", "acsasofia04@gmail.com", "alci3910@gmail.com", "aleuchoa@gmail.com",
+"amandamathias22@hotmail.com", "amandaitakay@gmail.com", "ana.balotin@hotmail.com", "anaflavia5567@outlook.com", "andreiasilvasilva3033@gmail.com",
+"andreleecitti5@gmail.com", "anelenox@gmail.com", "anaflavia5567@outlook.com", "bonilhalizania@gmail.com", "barbara.carvejani@hotmail.com",
+"bibi-munhoz@hotmail.com", "baldin.re@gmail.com", "brida.mv@hotmail.com", "casadocampoararenda@gmail.com", "carolinalandim2@gmail.com",
+"carloshenriquebiovet@gmail.com", "cesaripabline@gmail.com", "clarameiole@gmail.com", "clara.santpereira@gmail.com", "cr.maia@icloud.com",
+"crismultini@yahoo.com.br", "cristinirodrigues@yahoo.com", "danielle.adapec@hotmail.com", "daniellemenezzes@gmail.com", "debora.ruckl@hotmail.com",
+"deborabuniotti@hotmail.com", "deni.rodrigues.silva20@gmail.com", "detoni.adolfo@hotmail.com", "dienifersteffen99@gmail.com", "drmatheuscs@gmail.com",
+"eduardaleticiata14@gmail.com", "eduardobreuer@outlook.com", "erniverita@yahoo.com.br", "essenciasdaisis@gmail.com", "estrelasdog1263@gmail.com",
+"fabcevefc@gmail.com", "fabianna_ssouza@hotmail.com", "felipebenedicto.8@gmail.com", "felipecap@hotmail.com", "ffsnando4@gmail.com",
+"fernandayanes2011@hotmail.com", "flaviasimoesaraujo@gmail.com", "franciellitendolo@outlook.com", "gabrielagamap@outlook.com", "gabrielhenriquegontijo@hotmail.com",
+"giovannarubio0@gmail.com", "giiovannantunes@gmail.com", "gi.ca84@gmail.com", "giselepessanha.santos@gmail.com", "gragramatiuzzo@hotmail.com",
+"hayashikaren04@gmail.com", "henriveras@yahoo.com.br", "ingrydmedicivet@gmail.com", "iocelmafreitas@yahoo.com.br",
+"itavetmg@gmail.com", "jenny.biovet@uol.com.br", "jessica.lopes.monteiro@hotmail.com", "jessicamatiko765@gmail.com", "kamillamarcelino@live.com",
+"katerineyoneda@hotmail.com", "kikigoi@hotmail.com", "kamillamarcelino@live.com", "lala_mmc@hotmail.com", "larissa.de.lena@hotmail.com",
+"laura_calixto123@hotmail.com", "lubuenoserafim@outlook.com", "mariadudavida0@gmail.com", "mariana96.marchiori82@gmail.com", "mariana98moreira@hotmail.com",
+"mariaasilva2@unigranrio.br", "marciaalmeida0186@gmail.com", "marucha.n.28@hotmail.com", "mayoshidavet@gmail.com", "mcfcramalho@gmail.com",
+"micheleperola@outlook.com", "millenaneri8@gmail.com", "millanascimentocury@hotmail.com", "monicabkienzle@gmail.com", "materesa@terra.com.br",
+"piress.cintia@hotmail.com", "pires.cintia@hotmail.com", "rafaelramalhogo@gmail.com", "rafaelcoutinhovet@gmail.com", "rayanalucena5@gmail.com",
+"rosalina.dias@icloud.com", "roseanevi@outlook.com", "rpoliveiradasilva@gmail.com", "salete.dierings@gmail.com", "samaraln90@gmail.com",
+"sofia.rib.vet@gmail.com", "souzalidia93@outlook.com", "ssmartins.2012@hotmail.com", "tatianepedrelli@hotmail.com", "tatychapetta@gmail.com",
+"thaynaramarquesvin16@gmail.com", "tomazlima83@yahoo.com", "vanezamedsant@gmail.com", "veterinariabarleta@gmail.com", "victordecasttro@gmail.com",
+"vitoriabornacchi@gmail.com", "vitoriasandypires2014@gmail.com", "vivianebgimenez@uol.com.br", "viviane.olivr@gmail.com", "wadnads@hotmail.com",
+"welingtongmlima@gmail.com",   
 
-        // Demais e-mails abaixo
 
-"66662@upf.br", "acmvt@hotmail.com", "acsasofia04@gmail.com", "alci3910@gmail.com", "contato@dradenisechiquetti.com.br"
-
+"manoelagerlach@gmail.com", "lorenagomesadm438@gmail.com", "contato@dradenisechiquetti.com.br", "kati.hellen07@icloud.com",
+"carool.orth@gmail.com", "jcramos31@hotmail.com", "lincolna2@hotmail.com", "kerolly.vitoria1607@gmail.com", "yoranaconceicaosilva@gmail.com",
+"medicinaveterinaria282@gmail.com", "milareisvet@gmail.com", "thalytaryanna@gmail.com", "carlosfernandosiqueira@gmail.com",
+"nataliafsiqueira@outlook.com", "mardomingues03@gmail.com", "arychaves18@hotmail.com", "ingridtg1003@gmail.com", "marcaobhez@gmail.com",
+"vanessafariagomes2020@gmail.com", "analuizaalonsooliveira@gmail.com"  
+        
+        
+        
+        
     ];
 
     if (emailsPermitidos.includes(email)) {
