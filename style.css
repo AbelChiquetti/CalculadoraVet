@@ -20,16 +20,19 @@ body {
 /* Estilo para o container */
 .container {
     background-color: #fff;
-    border-radius: 8px;
-    padding: 20px;
+    border-radius: 15px;
+    padding-top: 50px;
+    padding-right: 50px;
+    padding-bottom: 50px;
+    padding-left: 50px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: 300px;
+    width: 500px;
     text-align: center;
 }
 
 /* Estilo para o cabeçalho */
-h2 {
-    font-size: 24px;
+img {
+    font-size: 25px;
     margin-bottom: 20px;
 }
 
@@ -47,6 +50,7 @@ input[type="email"] {
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 16px;
+    text-align: center;
 }
 
 button {
@@ -58,6 +62,8 @@ button {
     cursor: pointer;
     font-size: 16px;
     transition: background-color 0.3s ease;
+    margin-bottom: 15px;
+    
 }
 
 button:hover {
@@ -69,8 +75,10 @@ button:hover {
     color: #007bff;
     text-decoration: none;
     margin-top: 10px;
+    margin-bottom: 10px;
     font-size: 14px;
     transition: color 0.3s ease;
+
 }
 
 .whatsapp-link:hover {
