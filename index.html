@@ -1,173 +1,82 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
-  
-<!-- Inicio Script Login -->
-    
 <script>
-    document.addEventListener("contextmenu", function (e) {
-        e.preventDefault();
-    });
-
-    document.addEventListener("keydown", function (e) {
-        if (e.ctrlKey && (e.keyCode === 85 || e.keyCode === 73)) {
+        document.addEventListener("contextmenu", function (e) {
             e.preventDefault();
+        });
+    
+        document.addEventListener("keydown", function (e) {
+            if (e.ctrlKey && (e.keyCode === 85 || e.keyCode === 73)) {
+                e.preventDefault();
+            }
+        });
+    
+        // Função para definir o cookie após o login bem-sucedido
+        function definirCookie(email) {
+            // Definir o cookie com o email do usuário válido por 30 dias
+            var dataExpiracao = new Date();
+            dataExpiracao.setDate(dataExpiracao.getDate() + 15);
+            document.cookie = "email=" + email + ";expires=" + dataExpiracao.toUTCString() + ";path=/";
         }
-    });
-
-    // Função para definir o cookie após o login bem-sucedido
-    function definirCookie(email) {
-        // Definir o cookie com o email do usuário válido por 30 dias
-        var dataExpiracao = new Date();
-        dataExpiracao.setDate(dataExpiracao.getDate() + 15);
-        document.cookie = "email=" + email + ";expires=" + dataExpiracao.toUTCString() + ";path=/";
-    }
-
-    // Função para verificar o cookie e redirecionar o usuário para a página protegida, se existir
-    function verificarCookie() {
-        var email = obterCookie("email");
-        if (email) {
-            var emailsPermitidos = [
-                // E-mails adicionados no topo da lista
-    "abelcpl86@gmail.com", "luizacquintela@gmail.com", "veterinariodacidade@gmail.com", "andedvet@gmail.com", "martajuliane@hotmail.com",
-
-
-                // Demais e-mails abaixo
-                
-"66662@upf.br", "viviane.olivr@gmail.com", "wadnads@hotmail.com", "welingtongmlima@gmail.com", "talitacardoso1986@gmail.com"
-
-            ];
-
-            if (emailsPermitidos.includes(email)) {
-                window.location.href = "homepage.html"; // Redireciona para a página desejada
-            } else {
-                alert("E-mail não autorizado. Insira um e-mail válido registrado.");
+    
+        // Função para verificar o cookie e redirecionar o usuário para a página protegida, se existir
+        function verificarCookie() {
+            var email = obterCookie("email");
+            if (email) {
+                var emailsPermitidos = [
+                    // E-mails adicionados no topo da lista
+        "abelcpl86@gmail.com", "luizacquintela@gmail.com", "veterinariodacidade@gmail.com", "andedvet@gmail.com", "martajuliane@hotmail.com",
+    
+    
+                    // Demais e-mails abaixo
+                    
+    "66662@upf.br", "viviane.olivr@gmail.com", "wadnads@hotmail.com", "welingtongmlima@gmail.com", "talitacardoso1986@gmail.com"
+    
+                ];
+    
+                if (emailsPermitidos.includes(email)) {
+                    window.location.href = "homepage.html"; // Redireciona para a página desejada
+                } else {
+                    alert("E-mail não autorizado. Insira um e-mail válido registrado.");
+                }
             }
         }
-    }
-
-    // Função para validar o e-mail do formulário de login
-    function validarEmail() {
-        var email = document.getElementById('email').value;
-        var emailsPermitidos = [
-                // E-mails adicionados no topo da lista
-    "abelcpl86@gmail.com", "luizacquintela@gmail.com", "veterinariodacidade@gmail.com", "andedvet@gmail.com", "martajuliane@hotmail.com",
-
-
-                // Demais e-mails abaixo
-                
-"66662@upf.br", "viviane.olivr@gmail.com", "wadnads@hotmail.com", "welingtongmlima@gmail.com", "talitacardoso1986@gmail.com"
-
-        ];
-
-        if (emailsPermitidos.includes(email)) {
-            definirCookie(email); // Configura o cookie com o e-mail permitido
-            window.location.href = "homepage.html"; // Redireciona para a página desejada
-            return false; // Evita o envio do formulário
-        } else {
-            alert("E-mail não autorizado. Insira um e-mail válido registrado.");
-            return false; // Evita o envio do formulário
+    
+        // Função para validar o e-mail do formulário de login
+        function validarEmail() {
+            var email = document.getElementById('email').value;
+            var emailsPermitidos = [
+                    // E-mails adicionados no topo da lista
+        "abelcpl86@gmail.com", "luizacquintela@gmail.com", "veterinariodacidade@gmail.com", "andedvet@gmail.com", "martajuliane@hotmail.com",
+    
+    
+                    // Demais e-mails abaixo
+                    
+    "66662@upf.br", "viviane.olivr@gmail.com", "wadnads@hotmail.com", "welingtongmlima@gmail.com", "talitacardoso1986@gmail.com"
+    
+            ];
+    
+            if (emailsPermitidos.includes(email)) {
+                definirCookie(email); // Configura o cookie com o e-mail permitido
+                window.location.href = "homepage.html"; // Redireciona para a página desejada
+                return false; // Evita o envio do formulário
+            } else {
+                alert("E-mail não autorizado. Insira um e-mail válido registrado.");
+                return false; // Evita o envio do formulário
+            }
         }
-    }
-
-    // Função auxiliar para obter o valor de um cookie
-    function obterCookie(nome) {
-        var valor = document.cookie.match("(^|;)\\s*" + nome + "\\s*=\\s*([^;]+)");
-        return valor ? valor.pop() : "";
-    }
+    
+        // Função auxiliar para obter o valor de um cookie
+        function obterCookie(nome) {
+            var valor = document.cookie.match("(^|;)\\s*" + nome + "\\s*=\\s*([^;]+)");
+            return valor ? valor.pop() : "";
+        }
 </script>
-    
-<!-- Fim Script Login --> 
-    
-    
-    
-<title>Calculadora Veterinária - Login</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-
-    
-<!-- Inicio CSS Principal -->    
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        text-align: center;
-        background-color: #f5f5f5;
-    }
-
-    .container {
-        max-width: 400px;
-        margin: 50px auto;
-        padding: 20px;
-        background-color: #fff;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    }
-
-    h2 {
-        margin-top: 0;
-        color: #333;
-    }
-
-    input {
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 10px;
-        box-sizing: border-box;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        font-size: 16px;
-    }
-
-    .whatsapp-link {
-        display: block;
-        margin-top: 20px;
-        color: #333;
-        text-decoration: none;
-        font-weight: bold;
-        font-size: 12px;
-        text-transform: uppercase;
-    }
-
-    .whatsapp-link:hover {
-        text-decoration: underline;
-    }
-
-    button {
-        font-size: 18px;
-        background-color: #4caf50;
-        color: white;
-        padding: 14px;
-        border: none;
-        cursor: pointer;
-        width: 100%;
-        border-radius: 5px;
-        transition: background-color 0.3s;
-    }
-
-    button:hover {
-        background-color: #45A049;
-    }
-
-    .legend-container {
-        display: flex;
-        justify-content: space-between;
-    }
-
-    .legend {
-        font-size: 10px;
-        color: #666;
-        text-align: left;
-    }
-</style>
-<!-- Fim CSS Principal -->
- 
-    
-    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vetiy Web</title>
 </head>
-    
-    
-<!-- Inicio Body -->    
 <body onload="verificarCookie()">
     <div class="container">
         <h2>Calculadora Veterinária</h2>
@@ -181,10 +90,6 @@
         <div class="legend-container">
             <p class="legend">* Se a sua compra foi realizada recentemente, por favor, aguarde um prazo de até 2 horas para que ocorra a atualização do nosso banco de dados e, assim, o email de confirmação da compra possa ser enviado com sucesso.</p>
         </div>
-    </div>    
-<!-- Fim Body -->
-  
-        
+    </div>
 </body>
-    
 </html>
