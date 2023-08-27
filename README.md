@@ -1,6 +1,7 @@
-<h1>CalculadoraVet</h1>
+<h1>Veterify</h1>
+<h2>Calculadora Veterinária Inteligente</h2>
 
-<p>Bem vindo a minha Calculadora Inteligente para Veterinários</p>
+<p>Bem vindo a minha Calculadora desenvolvida para veterinários</p>
 
 <p>Você pode acessar clicando <a href="https://abelchiquetti.github.io/Veterify">aqui</a></p>
 
