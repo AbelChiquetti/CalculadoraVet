@@ -68,7 +68,7 @@ footer {
     margin-top: 12px;
     color: #666;
     font-size: 13px;
-    background-color: #dfdfdf;
+    background-color: ##f7f7f7;
     border-radius: 20px;
     padding: 10px;
     text-align: center;
@@ -122,7 +122,7 @@ footer {
 
 .botao-redirecionar {
     flex: 1;
-    background-color: #dfdfdf;
+    background-color: ##f7f7f7;
     color: #333;
     border: 0px solid #ccc;
     padding: 8px 16px;
