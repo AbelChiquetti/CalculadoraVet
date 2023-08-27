@@ -1,11 +1,9 @@
-/* Reset de estilos padrão */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Estilo global para o corpo */
 body {
     font-family: Arial, sans-serif;
     background-color: #f5f5f5;
@@ -17,7 +15,6 @@ body {
     margin: 0;
 }
 
-/* Estilo para o container */
 .container {
     background-color: #fff;
     border-radius: 15px;
@@ -30,13 +27,11 @@ body {
     text-align: center;
 }
 
-/* Estilo para o cabeçalho */
 img {
     font-size: 25px;
     margin-bottom: 20px;
 }
 
-/* Estilo para o formulário */
 form {
     display: flex;
     flex-direction: column;
