@@ -1,78 +1,87 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<script>
+    <script>
         document.addEventListener("contextmenu", function (e) {
             e.preventDefault();
         });
-    
+
         document.addEventListener("keydown", function (e) {
             if (e.ctrlKey && (e.keyCode === 85 || e.keyCode === 73)) {
                 e.preventDefault();
             }
         });
-    
+
         // Função para definir o cookie após o login bem-sucedido
         function definirCookie(email) {
-            // Definir o cookie com o email do usuário válido por 30 dias
             var dataExpiracao = new Date();
             dataExpiracao.setDate(dataExpiracao.getDate() + 15);
             document.cookie = "email=" + email + ";expires=" + dataExpiracao.toUTCString() + ";path=/";
         }
-    
+
         // Função para verificar o cookie e redirecionar o usuário para a página protegida, se existir
         function verificarCookie() {
             var email = obterCookie("email");
             if (email) {
-                var emailsPermitidos = [
-                    // E-mails adicionados no topo da lista
-        "abelcpl86@gmail.com", "contato@dradenisechiquetti.com.br", "veterinariodacidade@gmail.com", "andedvet@gmail.com", "martajuliane@hotmail.com",
-    
-    
-                    // Demais e-mails abaixo
-                    
-    "66662@upf.br", "viviane.olivr@gmail.com", "wadnads@hotmail.com", "welingtongmlima@gmail.com", "talitacardoso1986@gmail.com"
-    
-                ];
-    
-                if (emailsPermitidos.includes(email)) {
-                    window.location.href = "homepage.html"; // Redireciona para a página desejada
-                } else {
-                    alert("E-mail não autorizado. Insira um e-mail válido registrado.");
-                }
+                validarEmail(email); // Valida o email diretamente
             }
         }
-    
-        // Função para validar o e-mail do formulário de login
-        function validarEmail() {
-            var email = document.getElementById('email').value;
-            var emailsPermitidos = [
-                    // E-mails adicionados no topo da lista
-        "abelcpl86@gmail.com", "contato@dradenisechiquetti.com.br", "veterinariodacidade@gmail.com", "andedvet@gmail.com", "martajuliane@hotmail.com",
-    
-    
-                    // Demais e-mails abaixo
-                    
-    "66662@upf.br", "viviane.olivr@gmail.com", "wadnads@hotmail.com", "welingtongmlima@gmail.com", "talitacardoso1986@gmail.com"
-    
-            ];
-    
-            if (emailsPermitidos.includes(email)) {
-                definirCookie(email); // Configura o cookie com o e-mail permitido
-                window.location.href = "homepage.html"; // Redireciona para a página desejada
-                return false; // Evita o envio do formulário
-            } else {
-                alert("E-mail não autorizado. Insira um e-mail válido registrado.");
-                return false; // Evita o envio do formulário
-            }
-        }
-    
+
         // Função auxiliar para obter o valor de um cookie
         function obterCookie(nome) {
             var valor = document.cookie.match("(^|;)\\s*" + nome + "\\s*=\\s*([^;]+)");
             return valor ? valor.pop() : "";
         }
-</script>
+
+        // Função para validar o e-mail do formulário de login
+        function validarEmail(email) {
+            // Carrega o arquivo de e-mails permitidos
+            fetch('emails.json')
+                .then(response => response.json())
+                .then(data => {
+                    var emailsPermitidos = data.emailsPermitidos;
+
+                    if (emailsPermitidos.includes(email)) {
+                        definirCookie(email); // Configura o cookie com o e-mail permitido
+                        window.location.href = "homepage.html"; // Redireciona para a página desejada
+                    } else {
+                        alert("E-mail não autorizado. Insira um e-mail válido registrado.");
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro ao carregar os e-mails:', error);
+                    alert("Ocorreu um erro. Tente novamente mais tarde.");
+                });
+        }
+
+        // Função para ser chamada no submit do formulário de login
+        function handleSubmit(event) {
+            event.preventDefault(); // Evita o envio do formulário
+            var email = document.getElementById('email').value;
+            validarEmail(email);
+        }
+
+        // Função para obter o IP público do usuário
+        function obterIP() {
+            fetch('https://api.ipify.org?format=json')
+                .then(response => response.json())
+                .then(data => {
+                    const ip = data.ip;
+                    document.getElementById('user-ip').innerText = `Seu IP: ${ip}`;
+                    document.getElementById('alerta').style.display = 'block'; // Exibe o alerta sobre compartilhamento
+                })
+                .catch(error => {
+                    console.error('Erro ao obter IP:', error);
+                    document.getElementById('user-ip').innerText = "Não foi possível obter seu IP.";
+                });
+        }
+
+        // Chama a função para obter o IP ao carregar a página
+        window.onload = function() {
+            verificarCookie(); // Verifica o cookie do usuário
+            obterIP(); // Obtém o IP do usuário e exibe na página
+        }
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="style.css" rel="stylesheet">
@@ -81,20 +90,26 @@
     <link rel="apple-touch-icon" sizes="114x114" href="img/apple-icon-114x114.png">
     <title>Calculadora Veterify</title>
 </head>
-<body onload="verificarCookie()">
+<body>
     <div class="container">
         <figure>
             <img src="img/logo.svg" alt="Logotipo">
-          </figure>
-        <form onsubmit="return validarEmail()">
+        </figure>
+        <form onsubmit="handleSubmit(event)">
             <input type="email" id="email" name="email" placeholder="Insira o email de compra para validar" required>
             <button type="submit">Entrar</button>
         </form>
-            
+
         <a href="https://wa.me/5548984160728" class="whatsapp-link" target="_blank">Não consigo acessar</a>
 
         <div class="legend-container">
             <p class="legend">Se você realizou recentemente a sua compra, por favor, aguarde um prazo de até 2 horas para que ocorra a atualização do nosso banco de dados e, assim, o email de confirmação da compra possa ser enviado com sucesso.</p>
+        </div>
+
+        <!-- Exibição do IP do usuário e aviso sobre compartilhamento -->
+        <div id="user-ip" class="ip-display"></div>
+        <div id="alerta" class="alerta" style="display: none;">
+            <p class="ip-display"><strong>Atenção!</strong> O compartilhamento de acesso com outra pessoa pode ser detectado através do seu IP e resultará no bloqueio do acesso. Mantenha seu login seguro.</p>
         </div>
     </div>
 </body>

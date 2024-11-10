@@ -28,7 +28,7 @@ body {
 }
 
 img {
-    font-size: 25px;
+    max-width: 220px;
     margin-bottom: 20px;
 }
 
@@ -39,7 +39,7 @@ form {
 }
 
 input[type="email"] {
-    width: 100%;
+    width: 80%;
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
@@ -76,6 +76,13 @@ button:hover {
 
 }
 
+.ip-display {
+    margin-top: 15px;
+    margin-bottom: 15;
+    font-size: 13px;
+    color: #333;
+}
+
 .whatsapp-link:hover {
     color: #0056b3;
 }
@@ -86,7 +93,7 @@ button:hover {
 }
 
 .legend {
-    font-size: 10px;
+    font-size: 11px;
     color: #777;
 }
 
